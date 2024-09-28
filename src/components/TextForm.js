@@ -55,13 +55,28 @@
 
 
 import React from 'react'
-import { useState } from 'react'
+import { useState ,useRef} from 'react'
 
 function TextForm(props) {
 
   const [text, setText] = useState("");
 
   const [count, setCount] = useState(0);
+
+  const intervalRef = useRef(null);
+
+
+  const startCounter = () =>{
+    if(intervalRef.current !== null) return;
+    intervalRef.current = setInterval(()=>{
+      setCount((prevCount)=> prevCount+1);
+    },1000);
+  };
+
+  const stopCounter = () =>{
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  }
 
   const handleOnClick = () =>{
     setText(text.toUpperCase());
@@ -71,8 +86,22 @@ function TextForm(props) {
     setText(text.toLowerCase());
   }
 
+  const handleTitleCase = () => {
+    setText(
+      text
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+    );
+  };
+
   const handleClear = () =>{
     setText("");
+  }
+
+  const handleCount = () =>{
+    setCount("");
   }
 
   const handleIncrement = () =>{
@@ -98,6 +127,7 @@ function TextForm(props) {
       <button className='btn btn-primary mt-2' onClick={handleOnClick}>upperCase</button>
       <button className='btn btn-primary mt-2 mx-2' onClick={handleClick}>lowerCase</button>
       <button className='btn btn-primary mt-2' onClick={handleClear}>Clear</button>
+      <button className='btn btn-primary mt-2 mx-2' onClick={handleTitleCase}>Capital</button>
     </div>
 
     <div className='container mt-2'>
@@ -117,6 +147,9 @@ function TextForm(props) {
       <h1>Count - {count}</h1>
       <button className='btn btn-primary mx-1' onClick={handleIncrement}>Increment</button>
       <button className='btn btn-primary' onClick={handleDecrement}>decrement</button>
+      <button className='btn btn-primary mx-1' onClick={startCounter}>Start</button>
+      <button className='btn btn-primary' onClick={stopCounter}>Stop</button>
+      <button className='btn btn-primary mt-2 mx-1' onClick={handleCount}>clear</button>
 
     </div>
     </>
