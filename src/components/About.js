@@ -13,7 +13,8 @@ function About() {
     if (myStyle.color === "black"){
     setMyStyles({
       color:"white",
-      backgroundColor:"black"
+      backgroundColor:"black",
+      border :"1px solid white"
       
     })
     setBtnText("Disable Darkmode");

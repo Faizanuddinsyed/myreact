@@ -1,5 +1,3 @@
-
-
 // import React, { useState } from 'react'
 
 // function TextForm() {
@@ -8,7 +6,7 @@
 
 //   const handleOnClick = () => {
 //     setText(text.toUpperCase());
-   
+
 //   }
 
 //   const handleClick = () => {
@@ -33,7 +31,6 @@
 //       <button type="submit" className="btn btn-primary mx-2" onClick={handleClick}>lowercase</button>
 //       <button type="submit" className="btn btn-primary" onClick={handleClear}>clear text</button>
 
-
 //       <div className='container'>
 //         <h1>Text will be seen here</h1>
 //         <p>{text}</p>
@@ -47,164 +44,137 @@
 //       </div>
 
 //     </div>
-    
+
 //   )
 // }
 
 // export default TextForm
 
-
-import React from 'react'
-import { useState ,useRef} from 'react'
+import React from "react";
+import { useState, useRef } from "react";
 
 function TextForm(props) {
-
   const [text, setText] = useState("");
 
   const [count, setCount] = useState(0);
 
   const intervalRef = useRef(null);
 
+  // const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const startCounter = () =>{
-    if(intervalRef.current !== null) return;
-    intervalRef.current = setInterval(()=>{
-      setCount((prevCount)=> prevCount+1);
-    },1000);
+  const startCounter = () => {
+    if (intervalRef.current !== null) return;
+    intervalRef.current = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+    }, 1000);
   };
 
-  const stopCounter = () =>{
+  const stopCounter = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
-  }
+  };
 
-  const handleOnClick = () =>{
+  const handleOnClick = () => {
     setText(text.toUpperCase());
-  }
+  };
 
-  const handleClick = () =>{
+  const handleClick = () => {
     setText(text.toLowerCase());
-  }
+  };
 
   const handleTitleCase = () => {
     setText(
       text
         .toLowerCase()
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ')
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ")
     );
   };
 
-  const handleClear = () =>{
+  const handleClear = () => {
     setText("");
-  }
+  };
 
-  const handleCount = () =>{
-    setCount("");
-  }
+  const handleCount = () => {
+    setCount(" ");
+  };
 
-  const handleIncrement = () =>{
-    setCount(count+1);
-  }
+  const handleIncrement = () => {
+    setCount(count + 1);
+  };
 
-  const handleDecrement = () =>{
-    setCount(count-1);
-  }
+  const handleDecrement = () => {
+    setCount(count - 1);
+  };
 
-
-
-  const handleOnChange = (event) =>{
-      setText(event.target.value);
-  }
+  const handleOnChange = (event) => {
+    setText(event.target.value);
+  };
   return (
     <>
-    <div className='container'>
-      <h1>{props.heading}</h1>
-    <textarea className="form-control" id="myBox" rows="5" value={text} onChange={handleOnChange} ></textarea>
-    </div>
-    <div>
-      <button className='btn btn-primary mt-2' onClick={handleOnClick}>upperCase</button>
-      <button className='btn btn-primary mt-2 mx-2' onClick={handleClick}>lowerCase</button>
-      <button className='btn btn-primary mt-2' onClick={handleClear}>Clear</button>
-      <button className='btn btn-primary mt-2 mx-2' onClick={handleTitleCase}>Capital</button>
-    </div>
+      <div
+        className="container"
+        // style={{ color: props.mode === "dark" ? "white" : "#0a1a31" }}
+      >
+        <h1>{props.heading}</h1>
+        <textarea
+          className="form-control"
+          id="myBox"
+          rows="5"
+          value={text}
+          onChange={handleOnChange}
+          // style={{
+          //   backgroundColor: props.mode === "dark" ? "black" : "white",
+          //   color: props.mode === "dark" ? "white" : "black"
+          // }}
+        ></textarea>
+      </div>
+      <div>
+        <button className="btn btn-primary mt-2" onClick={handleOnClick}>
+          upperCase
+        </button>
+        <button className="btn btn-primary mt-2 mx-2" onClick={handleClick}>
+          lowerCase
+        </button>
+        <button className="btn btn-primary mt-2" onClick={handleClear}>
+          Clear
+        </button>
+        <button className="btn btn-primary mt-2 mx-2" onClick={handleTitleCase}>
+          Capital
+        </button>
+      </div>
 
-    <div className='container mt-2'>
+      <div className="container mt-2">
+        <h1> Preview Text</h1>
 
-     <h1> Preview Text</h1>
+        <p>{text}</p>
+        <p>
+          <b>Lenght -</b> {text.length}
+        </p>
+        <p1>{text.split(" ").length}</p1>
+      </div>
 
-     <p>{text}</p>
-     <p><b>Lenght -</b> {text.length}</p>
-     <p1>{text.split(" ").length}</p1>
-     
-     
-
-    </div>
-
-    <div className='container mt-3'>
-
-      <h1>Count - {count}</h1>
-      <button className='btn btn-primary mx-1' onClick={handleIncrement}>Increment</button>
-      <button className='btn btn-primary' onClick={handleDecrement}>decrement</button>
-      <button className='btn btn-primary mx-1' onClick={startCounter}>Start</button>
-      <button className='btn btn-primary' onClick={stopCounter}>Stop</button>
-      <button className='btn btn-primary mt-2 mx-1' onClick={handleCount}>clear</button>
-
-    </div>
+      <div className="container mt-3">
+        <h1>Count - {count}</h1>
+        <button className="btn btn-primary mx-1" onClick={handleIncrement}>
+          Increment
+        </button>
+        <button className="btn btn-primary" onClick={handleDecrement}>
+          decrement
+        </button>
+        <button className="btn btn-primary mx-1" onClick={startCounter}>
+          Start
+        </button>
+        <button className="btn btn-primary" onClick={stopCounter}>
+          Stop
+        </button>
+        <button className="btn btn-primary mt-2 mx-1" onClick={handleCount}>
+          clear
+        </button>
+      </div>
     </>
-  )
+  );
 }
 
-export default TextForm
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default TextForm;
