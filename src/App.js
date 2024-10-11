@@ -21,6 +21,10 @@ function App() {
         msg:message,
         type:type
       })
+
+      setTimeout(() => {
+        setAlert(null);
+      }, 3000);
   }
 
   const toggleMode = () => {
@@ -40,6 +44,23 @@ function App() {
     }
   }
 
+  const toggleGreenMode = () => {
+    if(mode === "light"){
+      setMode("dark");
+      setBtnText("Enable LightMode");
+      document.body.style.backgroundColor = "green";
+      document.body.style.color = "white";
+      showAlert("Dark Mode Enabled","success");
+    }
+    else{
+      setMode("light");
+      setBtnText("Enable GreenMode");
+      document.body.style.backgroundColor = "white";
+      document.body.style.color = "black";
+      showAlert("Light Mode Enabled","success");
+    }
+  }
+
   return (
     <>
     {/* <h1 classNameName="good">how are u </h1>
@@ -51,12 +72,12 @@ function App() {
     
 
 
-    <Navbar title = "TextUtils" about = "AboutUtils" mode = {mode} btnText={btnText} toggleMode={toggleMode}/>
+    <Navbar title = "TextUtils" about = "AboutUtils" mode = {mode} btnText={btnText} toggleMode={toggleMode} toggleGreenMode={toggleGreenMode}/>
 
     <Alert alert = {alert}/>
       
       <div className="container">
-      <TextForm heading = "Enter ur text to  analyze"/>
+      <TextForm showAlert={showAlert} heading = "Enter ur text to  analyze"/>
      
       </div>
 

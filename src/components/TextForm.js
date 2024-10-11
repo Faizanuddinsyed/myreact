@@ -76,10 +76,12 @@ function TextForm(props) {
 
   const handleOnClick = () => {
     setText(text.toUpperCase());
+    props.showAlert("text converted to uppercase","success")
   };
 
   const handleClick = () => {
     setText(text.toLowerCase());
+    props.showAlert("text converted to lowercase","success")
   };
 
   const handleTitleCase = () => {
