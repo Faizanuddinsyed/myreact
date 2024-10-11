@@ -111,6 +111,15 @@ function TextForm(props) {
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     console.log('Timer executed');
+  //   }, 5000);
+  
+  //   return () => clearTimeout(timer); // Cleanup
+  // }, []);
+  
   return (
     <>
       <div
